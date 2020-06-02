@@ -9,19 +9,21 @@ class userController extends baseController{
   }
 
   async getUsers(req, res){
-    let {name, surname} = req.params
+    let {name, surname, pagesize, page} = req.params
     let query = {}
     if (name){
       query.name = {
-        [Op.substring]: name || ""
+        [Op.substring]: name
       }
     }
     if (surname){
       query.surname = {
-        [Op.substring]: surname || ""
+        [Op.substring]: surname
       }
     }
     let users = await user.findAll({
+      limit: pagesize || 0,
+      offset: page * pagesize || 0,
       where: query
     })
 
