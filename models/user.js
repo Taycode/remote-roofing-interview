@@ -20,7 +20,19 @@ module.exports = (sequelize, DataTypes)=>{
       allowNull: false,
       type: DataTypes.STRING,
       unique: true
-    }
+    },
+    createdAt: {
+      allowNull: false,
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW(),
+    },
+    updatedAt: {
+      allowNull: false,
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW(),
+    },
+  },{
+    freezeTableName: true
   })
 
   user.associate = (model)=>{

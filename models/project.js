@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes)=>{
     project.belongsTo(model.user, {
       foreignKey: 'userId', targetKey: 'id'
     })
-    project.hasMany(model.project, {
+    project.hasMany(model.task, {
       foreignKey: 'projectId', as: 'Projects'
     })
   }
