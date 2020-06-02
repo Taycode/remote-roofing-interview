@@ -44,6 +44,8 @@ module.exports = (sequelize, DataTypes)=>{
         key: 'id'
       }
     }
+  }, {
+    freezeTableName: true
   })
 
   task.associate = (model)=>{
