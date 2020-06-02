@@ -37,14 +37,13 @@ class userController extends baseController{
     }
 
     return super.sendSuccess(res, toBeSentData, 'Users Gotten', 200)
-
   }
 
   async createUser(req, res){
     let { name = "", email = "", surname = ""} = req.body;
     let toBeSentData = {name, email, surname}
     let instance = await user.create(toBeSentData)
-    return res.status(201).json(instance)
+    return super.sendSuccess(res, instance, "User Created", 201)
   }
 }
 
