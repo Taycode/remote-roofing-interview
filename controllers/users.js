@@ -27,7 +27,13 @@ class userController extends baseController{
       where: query
     })
 
-    return super.sendSuccess(res, users, 'Users Gotten', 200)
+    let toBeSentData = {
+      users,
+      page,
+      pagesize
+    }
+
+    return super.sendSuccess(res, toBeSentData, 'Users Gotten', 200)
 
   }
 }
