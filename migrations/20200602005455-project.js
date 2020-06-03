@@ -21,7 +21,7 @@ module.exports = {
     status: {
       allowNull: false,
       type: Sequelize.STRING,
-      unique: true
+      unique: false
     },
     userId: {
       allowNull: true,

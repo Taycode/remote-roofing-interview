@@ -10,6 +10,14 @@ class BaseController {
    * @param status
    * @param header
    */
+
+  checkIfStatusValueIsValid (data){
+    data = data.split(",")
+    let containChecker = (arr, target) => target.every(v => arr.includes(v));
+
+    let validData = ["active", "inactive", "declined", "completed"]
+    return containChecker(validData, data)
+  }
   sendSuccess(res, data, message, status, header) {
     let resp = { status: true };
 

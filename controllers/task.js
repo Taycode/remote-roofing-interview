@@ -26,6 +26,11 @@ class taskController extends baseController{
     }
 
     if (status){
+
+      if (!super.checkIfStatusValueIsValid(status)){
+        return super.sendError(res, null, "Status is either active, inactive, declined or completed")
+      }
+
       query.status = {
         [Op.or]: status.split(",")
       }
@@ -76,6 +81,11 @@ class taskController extends baseController{
 
   async createTask(req, res){
     let { name = "", description = "", score = 0, status = "", userId, projectId} = req.body;
+
+    if (!super.checkIfStatusValueIsValid(status)){
+      return super.sendError(res, null, "Status is either active, inactive, declined or completed")
+    }
+
     let toBeSentData = {name, status, description, userId, score, projectId}
     let instance = await task.create(toBeSentData)
     return super.sendSuccess(res, instance, "Task Created", 201)
@@ -84,3 +94,4 @@ class taskController extends baseController{
 }
 
 module.exports = new taskController();
+

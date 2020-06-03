@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes)=>{
     status: {
       allowNull: false,
       type: DataTypes.STRING,
-      unique: true
+      unique: false
     },
     userId: {
       allowNull: true,
