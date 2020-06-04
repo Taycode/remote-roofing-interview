@@ -10,7 +10,7 @@ class taskController extends baseController{
 
   async getAllTasks(req, res){
 
-    let {score, assignees, status, name, assignees_field} = req.query;
+    let {score, assignees, status, name, assignees_field, pagesize, page} = req.query;
     let query = {}
 
     if (score){
@@ -69,14 +69,22 @@ class taskController extends baseController{
     }
 
     let response = await task.findAll({
-      where: query
+      where: query,
+      limit: pagesize || null,
+      offset: pagesize * (page - 1) || null,
     })
+
+    let toBeSentData = {
+      response,
+      page,
+      pagesize
+    }
 
     if (!response.length){
       return super.sendSuccess(res, [], "No task was gotten")
     }
 
-    return super.sendSuccess(res, response, "Tasks Gotten")
+    return super.sendSuccess(res, toBeSentData, "Tasks Gotten")
   }
 
   async createTask(req, res){

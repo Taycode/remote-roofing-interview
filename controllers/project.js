@@ -30,7 +30,7 @@ class projectController extends baseController{
 
   async getAllProjects(req, res){
     let tasks = await task.findAll();
-    let {score, assignees, status, name, assignees_field, description} = req.query;
+    let {score, assignees, status, name, assignees_field, description, pagesize, page} = req.query;
     let query = {}
 
     if (name){
@@ -120,10 +120,19 @@ class projectController extends baseController{
     }
 
     let projects = await project.findAll({
-      where: query
+      where: query,
+      limit: pagesize || null,
+      offset: pagesize * (page - 1) || null,
     })
-
-    return super.sendSuccess(res, projects, "Projects Gotten", 200)
+    let toBeSentData = {
+      projects,
+      page,
+      pagesize
+    }
+  if (!projects.length){
+    return super.sendError(res, null, "No Projects Returned", 200)
+  }
+    return super.sendSuccess(res, toBeSentData, "Projects Gotten", 200)
   }
 
 }
