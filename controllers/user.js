@@ -26,7 +26,7 @@ class userController extends baseController{
 
     let users = await user.findAll({
       limit: pagesize || null,
-      offset: page * pagesize || null,
+      offset: pagesize * (page - 1) || null,
       where: query
     })
 
