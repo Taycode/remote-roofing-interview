@@ -1,15 +1,6 @@
 # remote-roofing-interview
 
 
-Endpoints
+The URL to the Postman documentation of the API is https://documenter.getpostman.com/view/8015237/SztHWk16?version=latest
 
-Get Users
-```
-http://localhost:3000/api/user?name=myname&surname=mysurname
-```
-This endpoint search user by filtering with surname and name.
-
-Post Users
-```
-
-```
+ 
